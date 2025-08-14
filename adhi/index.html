@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Adhisree Paul — Portfolio</title>
+<meta name="description" content="Portfolio of Adhisree Paul — builds web apps and ML systems." />
+<meta name="color-scheme" content="dark only" />
+<style>
+  /* ---------- Base / Theme ---------- */
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --bg:#0b0d10; --surface:#0f131a; --card:#141821;
+    --text:#e7ecf2; --muted:#a6adba;
+    --line:rgba(255,255,255,.10); --line-2:rgba(255,255,255,.18);
+    --accent:#7aa2ff; --accent-2:#6df0c2;
+    --radius:16px; --shadow:0 12px 30px rgba(0,0,0,.35);
+    --step-0:12px; --step-1:14px; --step-2:16px; --step-3:20px; --step-4:28px; --step-5:48px;
+    --gap-1:10px; --gap-2:14px; --gap-3:18px; --gap-4:24px; --gap-5:32px;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; color:var(--text);
+    font: var(--step-2)/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    background:
+      radial-gradient(1200px 600px at 20% -10%, #1a2030, transparent 60%),
+      radial-gradient(1000px 500px at 120% 10%, #142428, transparent 55%),
+      var(--bg);
+    overflow-x:hidden;
+  }
+  .visually-hidden{position:absolute!important; width:1px;height:1px; margin:-1px; border:0; padding:0; white-space:nowrap; clip-path:inset(100%); clip:rect(0 0 0 0); overflow:hidden}
+  .container{max-width:1100px; margin-inline:auto; padding-inline:20px}
+  section{padding-block:var(--gap-5); scroll-margin-top:86px}
+
+  /* subtle noise */
+  body::after{content:""; position:fixed; inset:0; pointer-events:none;
+    background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.03"/></svg>');
+    mix-blend-mode:overlay; animation:noise 8s linear infinite}
+  @keyframes noise{from{transform:translate3d(0,0,0)}to{transform:translate3d(140px,0,0)}}
+
+  a{color:inherit; text-decoration:none}
+
+  /* ---------- Header ---------- */
+  header{position:sticky; top:0; z-index:50; backdrop-filter:blur(8px);
+    background:color-mix(in srgb, var(--bg) 80%, transparent); border-bottom:1px solid var(--line)}
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:var(--gap-2); padding-block:16px}
+  .logo{display:inline-grid; place-items:center; width:40px; height:40px; border-radius:10px;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#0b0d10; font-weight:800; letter-spacing:.5px; box-shadow:var(--shadow)}
+  nav{display:flex; gap:8px}
+  nav a{padding:8px 12px; border-radius:12px; opacity:.9}
+  nav a:hover, nav a:focus-visible{background:rgba(255,255,255,.06); outline:none}
+  .nav-cta{display:flex; gap:10px; align-items:center}
+  .kbd{font:12px/1.2 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New";
+    padding:4px 6px; border-radius:8px; border:1px solid var(--line); color:var(--muted)}
+  .btn{display:inline-flex; align-items:center; gap:10px; height:40px; padding:10px 14px;
+    background:#161b26; border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow)}
+  .btn:hover{transform:translateY(-1px); background:#1b2130}
+  .btn.ghost{background:transparent; border-color:var(--line-2)}
+  .btn .dot{width:8px; height:8px; border-radius:999px; background:var(--accent)}
+
+  /* ---------- Titles ---------- */
+  h1{margin:0 0 6px; font-size:clamp(30px,5vw,var(--step-5)); line-height:1.12; letter-spacing:.2px}
+  h2{margin:0 0 2px; font-size:clamp(20px,3.6vw,var(--step-4))}
+  h3{margin:0; font-size:clamp(16px,2.4vw,18px)}
+  .subtitle{color:var(--muted); margin:0 0 18px}
+  .section-title{display:flex; align-items:center; gap:10px; margin-bottom:14px}
+  .section-title .rule{flex:1; height:1px; background:linear-gradient(90deg, rgba(255,255,255,.18), transparent)}
+
+  /* ---------- Hero ---------- */
+  .hero{display:grid; grid-template-columns:1fr 1fr; gap:var(--gap-5)}
+  @media (max-width:900px){ .hero{grid-template-columns:1fr; gap:var(--gap-4)} }
+  .chip{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid var(--line);
+    background:#121621; color:var(--muted); font-size:13px}
+  .chip .pulse{width:8px; height:8px; border-radius:99px; background:var(--accent); box-shadow:0 0 0 0 rgba(122,162,255,.5); animation:pulse 2s infinite}
+  @keyframes pulse{to{box-shadow:0 0 0 10px rgba(122,162,255,0)}}
+
+  .hero-art{position:relative; border-radius:var(--radius); overflow:hidden; min-height:360px;
+    background:radial-gradient(1000px 600px at -10% 10%, rgba(122,162,255,.22), transparent 40%), linear-gradient(180deg,#0e1218,#0a0d12 60%);
+    border:1px solid var(--line); box-shadow:var(--shadow)}
+  .placeholder{position:absolute; inset:0; display:grid; place-items:center; opacity:.95; background:
+      radial-gradient( at 20% 20%, rgba(122,162,255,.15), transparent 40% ),
+      radial-gradient( at 80% 80%, rgba(109,240,194,.12), transparent 35% ),
+      linear-gradient(180deg, #0f141b, #0b0f15)}
+  .placeholder svg{width:min(80%,540px); height:auto; filter:drop-shadow(0 10px 30px rgba(0,0,0,.55))}
+
+  /* ---------- Cards / Grids ---------- */
+  .grid{display:grid; gap:var(--gap-3); align-items:stretch}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  @media (max-width:900px){ .grid.cols-2,.grid.cols-3{grid-template-columns:1fr} }
+
+  .card{
+    background:linear-gradient(180deg,var(--card),#0f131a); border:1px solid var(--line);
+    border-radius:var(--radius); padding:16px; position:relative; overflow:hidden;
+    display:flex; flex-direction:column; min-height:100%; transition:transform .2s ease, border-color .2s ease
+  }
+  .card:hover{transform:translateY(-2px); border-color:var(--line-2)}
+  /* unified header bar */
+  .card::before{
+    content:""; position:absolute; left:16px; right:16px; top:12px; height:8px; border-radius:999px;
+    background:linear-gradient(90deg, color-mix(in srgb, var(--accent) 70%, transparent), color-mix(in srgb, var(--accent-2) 70%, transparent));
+    opacity:.12; pointer-events:none
+  }
+  .card header{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-top:12px}
+  .meta{color:var(--muted); font-size:14px}
+
+  .list{display:flex; gap:10px; flex-wrap:wrap; padding:0; margin:10px 0 0; list-style:none}
+  .list li{padding:6px 10px; border-radius:999px; background:#111723; color:var(--muted); border:1px solid var(--line); font-size:13px}
+
+  /* Metrics: 4-up desktop, 2-up mobile */
+  .metrics{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:18px}
+  @media (max-width:900px){ .metrics{grid-template-columns:1fr 1fr} }
+  .metric{background:#0f141b; border:1px solid var(--line); border-radius:14px; padding:14px}
+  .metric b{display:block; font-size:20px; margin-bottom:4px}
+
+  /* ---------- Footer ---------- */
+  footer{padding:26px 0 60px; color:var(--muted); font-size:14px}
+
+  /* ---------- FX ---------- */
+  .reveal{opacity:0; transform:translateY(8px); transition:.6s cubic-bezier(.2,.6,.2,1)}
+  .reveal.active{opacity:1; transform:none}
+  #cursor{position:fixed; z-index:100; width:10px; height:10px; border-radius:999px; pointer-events:none; left:0; top:0; translate:-50% -50%;
+    background:radial-gradient(circle at 30% 30%, white, rgba(255,255,255,.2) 60%, transparent 70%); mix-blend-mode:difference; opacity:.75;
+    transition: width .15s ease, height .15s ease, opacity .2s ease}
+  .hovering-link #cursor{width:20px; height:20px; opacity:1}
+  #toast{position:fixed; bottom:18px; left:50%; translate:-50% 0; background:#121825; border:1px solid var(--line-2);
+    padding:10px 14px; border-radius:12px; color:var(--text); opacity:0; transform:translateY(8px); transition:.3s ease; box-shadow:var(--shadow); z-index:110}
+  #toast.show{opacity:1; transform:none}
+
+  /* ---------- Command Palette ---------- */
+  .cmdk-backdrop{position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; place-items:center; z-index:120; backdrop-filter:blur(3px)}
+  .cmdk{width:min(720px,92vw); background:#0f141b; border:1px solid var(--line-2); border-radius:16px; box-shadow:var(--shadow); overflow:hidden}
+  .cmdk header{position:unset; background:transparent; border:0}
+  .cmdk input{width:100%; padding:14px 16px; background:transparent; border:0; color:var(--text); font-size:16px; outline:none}
+  .cmdk-list{max-height:320px; overflow:auto; border-top:1px solid var(--line)}
+  .cmdk-item{padding:12px 16px; border-bottom:1px solid rgba(255,255,255,.06); cursor:pointer}
+  .cmdk-item:hover,.cmdk-item:focus{background:#151b27; outline:none}
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce){
+    .reveal{transition:none} #cursor{display:none} .btn:hover{transform:none} body::after{animation:none}
+  }
+</style>
+</head>
+<body>
+  <div id="cursor" aria-hidden="true"></div>
+  <a href="#main" class="visually-hidden">Skip to content</a>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#" aria-label="Home">AP</a>
+      <nav aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-cta">
+        <span class="kbd">⌘K</span>
+        <a class="btn ghost" href="resume.pdf" download>Resume</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="chip reveal"><span class="pulse"></span><span>Open to Software & AI/ML roles</span></div>
+        <h1 class="reveal" style="transition-delay:.05s">Adhisree Paul</h1>
+        <p class="subtitle reveal" style="transition-delay:.1s">Builds web apps and ML systems.</p>
+        <div class="actions reveal" style="transition-delay:.15s">
+          <a class="btn" href="mailto:paul.a94361@gmail.com"><span class="dot"></span>Email</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/adhisree-paul-b894602ab/" target="_blank" rel="noopener">LinkedIn</a>
+          <button class="btn ghost" id="copy-email">Copy email</button>
+        </div>
+        <div class="metrics reveal" style="transition-delay:.2s">
+          <div class="metric"><b>50+ people</b><div class="meta">Onboarded via AI chatbot</div></div>
+          <div class="metric"><b>700 ms faster</b><div class="meta">Backend page loads</div></div>
+          <div class="metric"><b>~24% ↑ Sharpe</b><div class="meta">Trading agent backtests</div></div>
+          <div class="metric"><b>~90% accuracy</b><div class="meta">Real-time classifier</div></div>
+        </div>
+      </div>
+      <div class="hero-art reveal" style="transition-delay:.1s" aria-label="Adhisree Paul portrait">
+        <img src="IMG20250604155708.jpg" alt="Adhisree Paul - a young woman with dark hair seated in a cafe setting" style="width: 126%; object-fit: cover; border-radius: var(--radius);">
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-title"><h2>Projects</h2><div class="rule"></div></div>
+      <div class="grid cols-2" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+        <article class="card reveal">
+          <header>
+            <h3>Beyond Price — Sentiment Aware RL Trader</h3>
+            <a class="btn ghost" href="https://github.com/FrozenSaturn/esg_sentiment" target="_blank" rel="noopener">GitHub</a>
+          </header>
+          <p class="meta">FinBERT + PPO; higher risk-adjusted returns in backtests.</p>
+          <ul class="list"><li>FinBERT</li><li>PPO</li><li>Stable-Baselines3</li><li>Pandas</li><li>Plotly</li></ul>
+          <p class="meta" style="margin-top:8px">~24% ↑ Sharpe, ~34% ↑ Sortino in tests.</p>
+        </article>
+
+        <article class="card reveal">
+          <header><h3>Classy.img — Live Image Classifier</h3></header>
+          <p class="meta">React UI + Flask API. ResNet50 recognises frames from live video.</p>
+          <ul class="list"><li>Python</li><li>Flask</li><li>Keras</li><li>TensorFlow</li><li>React</li></ul>
+          <p class="meta" style="margin-top:8px">~90% accuracy on live capture.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <div class="section-title"><h2>Experience</h2><div class="rule"></div></div>
+      <div class="grid cols-2">
+        <article class="card reveal">
+          <header>
+            <div>
+              <h3>Intern — Software Engineer — Abhinava Innovations</h3>
+              <div class="meta">Aug 2025 – Jan 2026 • Stipend ₹5,000/month</div>
+            </div>
+          </header>
+          <ul class="list">
+            <li>Develop AI-powered web applications.</li>
+            <li>Integrate APIs into scalable systems.</li>
+            <li>Manage secure repositories per internal protocols.</li>
+            <li>Participate in agile: sprints, reviews, team collab.</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <header>
+            <div>
+              <h3>AI Intern — CollegeTips.in</h3>
+              <div class="meta">May 2025 – Jun 2025</div>
+            </div>
+          </header>
+          <ul class="list">
+            <li>Deployed chatbot for digital literacy → onboarded 50+ elderly users.</li>
+            <li>React Native app with Dialogflow + Google TTS.</li>
+            <li>Built pet-friendly city website; 100+ users in a week.</li>
+            <li>Flask API + SQLite; page loads ~700 ms faster.</li>
+          </ul>
+        </article>
+
+        <article class="card reveal">
+          <header>
+            <div>
+              <h3>Lead UI/UX — FitCoin (hackathon)</h3>
+              <div class="meta">Diversion2k25 • 36-hour sprint</div>
+            </div>
+          </header>
+          <ul class="list">
+            <li>Designed website and mobile UI in Figma.</li>
+            <li>Interactive games → engagement up 30%.</li>
+            <li>Produced 10-page developer docs.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-title"><h2>Skills</h2><div class="rule"></div></div>
+      <div class="grid cols-3">
+        <div class="card reveal">
+          <header><h3>Software</h3></header>
+          <ul class="list"><li>Python</li><li>MongoDB</li><li>Express</li><li>React</li><li>Node</li><li>SQL</li><li>Flask</li><li>HTML</li><li>CSS</li><li>Tailwind</li></ul>
+        </div>
+        <div class="card reveal">
+          <header><h3>AI / ML</h3></header>
+          <ul class="list"><li>NLP</li><li>Reinforcement Learning</li><li>Supervised & Unsupervised</li><li>Data prep</li></ul>
+        </div>
+        <div class="card reveal">
+          <header><h3>Data / CS</h3></header>
+          <ul class="list"><li>DSA</li><li>DBMS</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="section-title"><h2>Education</h2><div class="rule"></div></div>
+      <article class="card reveal">
+        <header><h3>B.Tech — Computer Science</h3></header>
+        <div class="meta">University of Engineering & Management, Kolkata • GPA 8.2/10 • AI & ML specialization • Expected Aug 2026</div>
+      </article>
+    </section>
+
+    <!-- CERTS -->
+    <section id="certs">
+      <div class="section-title"><h2>Certifications</h2><div class="rule"></div></div>
+      <div class="grid cols-2">
+        <div class="card reveal">
+          <ul class="list">
+            <li>AWS Solution Architecture (May 2025)</li>
+            <li>TATA GenAI Job Simulation (Jun 2025)</li>
+            <li>Deloitte Technology Simulation (Apr 2025)</li>
+            <li>MLH Diversion2k25 (Mar 2025)</li>
+          </ul>
+        </div>
+        <div class="card reveal">
+          <ul class="list">
+            <li>UCODE 7.0 — CodeChef (Feb 2024)</li>
+            <li>Hack Hive Hoopla (Mar 2024)</li>
+            <li>Ureckathon 4.0 (Mar 2024)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title"><h2>Contact</h2><div class="rule"></div></div>
+      <div class="grid">
+        <article class="card reveal">
+          <p style="margin:0 0 8px">Email: <a href="mailto:paul.a94361@gmail.com">paul.a94361@gmail.com</a></p>
+          <p style="margin:0 0 8px">Phone: <a href="tel:+919862519828">+91 98625 19828</a></p>
+          <p style="margin:0">LinkedIn: <a href="https://www.linkedin.com/in/adhisree-paul-b894602ab/" target="_blank" rel="noopener">adhisree-paul</a></p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div>&copy; <span id="y"></span> Adhisree Paul • Kolkata, India</div>
+  </footer>
+
+  <!-- Command palette -->
+  <div class="cmdk-backdrop" id="cmdk">
+    <div class="cmdk" role="dialog" aria-modal="true" aria-label="Command palette">
+      <header><input id="cmdk-input" placeholder="Type to jump or act…" aria-label="Command input" /></header>
+      <div class="cmdk-list" id="cmdk-list" role="listbox" tabindex="0"></div>
+    </div>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite">Copied</div>
+
+<script>
+  // Year
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // Reveal on scroll
+  const revealEls=[...document.querySelectorAll('.reveal')];
+  const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('active'); io.unobserve(e.target);}})},{threshold:.12});
+  revealEls.forEach(el=>io.observe(el));
+
+  // Custom cursor
+  const cursor=document.getElementById('cursor'); let cx=0,cy=0,tx=0,ty=0; const lerp=(a,b,t)=>a+(b-a)*t;
+  const raf=()=>{tx=lerp(tx,cx,.18); ty=lerp(ty,cy,.18); cursor.style.transform=`translate(${tx}px, ${ty}px)`; requestAnimationFrame(raf);};
+  window.addEventListener('pointermove',(e)=>{cx=e.clientX; cy=e.clientY}); raf();
+  const linkHover=(on)=>{document.documentElement.classList.toggle('hovering-link',on);}
+  document.querySelectorAll('a,button,.btn').forEach(el=>{el.addEventListener('mouseenter',()=>linkHover(true)); el.addEventListener('mouseleave',()=>linkHover(false));});
+
+  // Copy email
+  const toast=document.getElementById('toast');
+  const showToast=(msg)=>{toast.textContent=msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),1800);};
+  document.getElementById('copy-email').addEventListener('click', async ()=>{
+    try{await navigator.clipboard.writeText('paul.a94361@gmail.com'); showToast('Email copied');}
+    catch{showToast('Copy failed');}
+  });
+
+  // Command palette (⌘K / Ctrl+K)
+  const cmdkBackdrop=document.getElementById('cmdk'), cmdkInput=document.getElementById('cmdk-input'), cmdkList=document.getElementById('cmdk-list');
+  const actions=[
+    {label:'Go to Projects', run:()=>location.hash='#projects'},
+    {label:'Go to Experience', run:()=>location.hash='#experience'},
+    {label:'Go to Skills', run:()=>location.hash='#skills'},
+    {label:'Go to Education', run:()=>location.hash='#education'},
+    {label:'Go to Contact', run:()=>location.hash='#contact'},
+    {label:'Open Résumé', run:()=>window.open('resume.pdf','_blank')},
+    {label:'Open LinkedIn', run:()=>window.open('https://www.linkedin.com/in/adhisree-paul-b894602ab/','_blank')},
+    {label:'Copy email', run:()=>navigator.clipboard.writeText('paul.a94361@gmail.com').then(()=>showToast('Email copied'))}
+  ];
+  function openCmdk(){cmdkBackdrop.style.display='grid'; cmdkInput.value=''; renderList(actions); cmdkInput.focus(); document.body.style.overflow='hidden';}
+  function closeCmdk(){cmdkBackdrop.style.display='none'; document.body.style.overflow='';}
+  function renderList(items){cmdkList.innerHTML=items.map((a,i)=>`<div class="cmdk-item" data-i="${i}" tabindex="0">${a.label}</div>`).join('');
+    cmdkList.querySelectorAll('.cmdk-item').forEach(el=>{el.addEventListener('click',()=>{items[+el.dataset.i].run(); closeCmdk();});
+      el.addEventListener('keydown',(e)=>{if(e.key==='Enter'){items[+el.dataset.i].run(); closeCmdk();}});});}
+  function filterList(q){q=q.toLowerCase(); renderList(actions.filter(a=>a.label.toLowerCase().includes(q)));}
+  cmdkInput.addEventListener('input', e=>filterList(e.target.value));
+  window.addEventListener('keydown',(e)=>{if((e.key.toLowerCase()==='k'&&(e.metaKey||e.ctrlKey))){e.preventDefault(); openCmdk();} if(e.key==='Escape') closeCmdk();});
+  cmdkBackdrop.addEventListener('click',(e)=>{if(e.target===cmdkBackdrop) closeCmdk();});
+
+  // Reduced motion
+  const media=window.matchMedia('(prefers-reduced-motion: reduce)'); if(media.matches){cancelAnimationFrame(raf); cursor.style.display='none';}
+</script>
+</body>
+</html>
